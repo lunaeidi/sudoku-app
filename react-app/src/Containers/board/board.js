@@ -19,7 +19,7 @@ class Board extends Component {
       '22': '#81D4FA'
     }
   }
-  changeGrid = () => {  //needed so the page doesnt reload
+  componentDidMount() {  //needed so the page doesnt reload
     let newGrid = JSON.parse(JSON.stringify(this.state.grid))
     newGrid[0][1]=4
     newGrid[0][5]=6
@@ -47,9 +47,19 @@ class Board extends Component {
       grid: newGrid
     })
   }
+// <button.addEventListener('click',function(){
+//
+// })       //the 1-9 options at button
+  ClickHandler = (key) => {
+    const helper = key.split('')
+    let y = key[0]
+    let x = key[1]
+    let
+    newGrid[y][x]=
+  }
   render(){
     return (
-      <div className= "block" onClick={this.changeGrid}>
+      <div className= "block">
         {this.state.grid
           .map((row,indY)=>{ //indY is the index, the first row (array) has index 0....
             return (
