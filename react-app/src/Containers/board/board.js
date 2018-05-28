@@ -51,11 +51,6 @@ class Board extends Component {
 //
 // })       //the 1-9 options at button
   ClickHandler = (key) => {
-    const helper = key.split('')
-    let y = key[0]
-    let x = key[1]
-    let
-    newGrid[y][x]=
   }
   render(){
     return (
