@@ -78,7 +78,7 @@ class Board extends Component {
                   style={divStyle}
                   key={`${indX} ${indY}`}
                   prefilled
-                  > {square} </Square>})}
+                  > {square} </Square>})} //where does {square} come from ? 
             </div>)
           })}
       </div>
