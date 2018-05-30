@@ -42,6 +42,17 @@ class Board extends Component {
     newGrid[4][5]=9
     newGrid[6][5]=2
 
+    newGrid[1][6]=5
+    newGrid[1][7]=9
+    newGrid[2][7]=8
+    newGrid[5][7]=6
+    newGrid[5][6]=9
+    newGrid[6][6]=1
+    newGrid[6][8]=5
+    newGrid[7][8]=9
+    newGrid[8][7]=2
+
+
 
     this.setState({
       grid: newGrid
