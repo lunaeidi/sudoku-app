@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Square from'../../Components/square/square'
-
+import NumberButtonContainer from '../../Containers/numberButtonContainer'
 class Board extends Component {
   state = {
     grid:new Array(9)
@@ -78,9 +78,11 @@ class Board extends Component {
                   style={divStyle}
                   key={`${indX} ${indY}`}
                   prefilled
-                  > {square} </Square>})} //where does {square} come from ? 
+                  > {square} </Square>})}
             </div>)
           })}
+          
+          <NumberButtonContainer/>
       </div>
     )
   }
