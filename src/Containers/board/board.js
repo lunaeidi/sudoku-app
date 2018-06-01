@@ -7,6 +7,7 @@ class Board extends Component {
       .fill(
         new Array(9).fill(0)
       ),
+    selected: null,
     color:{
       '00': '#90CAF9',
       '01': '#1DE9B6',
@@ -58,11 +59,20 @@ class Board extends Component {
       grid: newGrid
     })
   }
-// <button.addEventListener('click',function(){
-//
-// })       //the 1-9 options at button
-  ClickHandler = (key) => {
+  selectHandler = (event) => {
+
+    console.log(event.target)
+    this.setState({selected: event.target.key }) //will change .key to somethng else...
+
+  // pass this.state.selected
+    debugger
   }
+  numberHandler= (event) => {
+    alert('click')
+    debugger
+    return event.target.innerHTML
+  }
+
   render(){
     return (
       <div className= "block">
@@ -78,11 +88,12 @@ class Board extends Component {
                   style={divStyle}
                   key={`${indX} ${indY}`}
                   prefilled
+                  selectHandler= {this.selectHandler}
                   > {square} </Square>})}
             </div>)
           })}
-          
-          <NumberButtonContainer/>
+
+          <NumberButtonContainer numberHandler={this.numberHandler}/>
       </div>
     )
   }

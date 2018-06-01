@@ -11,7 +11,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Switch> //only one route displayed
+        <Switch> 
           <Route exact path="/login" component={Login}/>
           <Route exact path="/" component={Board}/>
           <Route exact path="/scores" component={Scores}/>

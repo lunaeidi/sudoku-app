@@ -9,6 +9,7 @@ class NumberButtonContainer extends Component {
       <div>
       {this.state.numbers.map(number =>
         <NumberButton
+        numberHandler= {this.props.numberHandler}
         value= {number}
         > {number}
         </NumberButton>
@@ -23,7 +24,7 @@ class NumberButtonContainer extends Component {
         <NumberButton></NumberButton>
         <NumberButton></NumberButton>
         <NumberButton></NumberButton>
-        <NumberButton></NumberButton>*/}  
+        <NumberButton></NumberButton>*/}
       </div>
     )
   }
