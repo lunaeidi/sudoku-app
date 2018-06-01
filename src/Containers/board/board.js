@@ -117,4 +117,5 @@ class Board extends Component {
 }
 //after all squares are not 0, it should trigger the fetch request, or they should press a button that says done (this button
 //triggers the fetch request, then the fetch request triggers the rendering of the difficulty buttons .)
+//see conditional fetch request example from props and state lab 
 export default Board
