@@ -8,6 +8,7 @@ class Board extends Component {
         new Array(9).fill(0)
       ),
     selected: null,
+
     color:{
       '00': '#90CAF9',
       '01': '#1DE9B6',
@@ -21,7 +22,7 @@ class Board extends Component {
     }
   }
   componentDidMount() {  //needed so the page doesnt reload
-    let newGrid = JSON.parse(JSON.stringify(this.state.grid))
+    let newGrid = JSON.parse(JSON.stringify(this.state.grid)) //modifying an object within the state
     newGrid[0][1]=4
     newGrid[0][5]=6
     newGrid[1][0]=6
@@ -59,18 +60,29 @@ class Board extends Component {
       grid: newGrid
     })
   }
-  selectHandler = (event) => {
-
-    console.log(event.target)
-    this.setState({selected: event.target.key }) //will change .key to somethng else...
-
-  // pass this.state.selected
-    debugger
+  selectHandler = (event,index) => {
+     this.setState({selected: index })
+     console.log(index)
   }
   numberHandler= (event) => {
-    alert('click')
-    debugger
-    return event.target.innerHTML
+  /*  let numberSelected= event.target.innerHTML
+    let newGrid2= JSON.parse(JSON.stringify(this.state.grid))
+    let index= this.state.selected.split('')
+    console.log(index)
+    let y= index[0]
+    let x=index[1]
+    newGrid2[y][x]=numberSelected
+    console.log(newGrid2[y][x])
+    this.setState({grid:newGrid2}) */
+
+    const newVal = event.target.innerHTML
+    let index = this.state.selected.split(' ')
+    let newGrid = JSON.parse(JSON.stringify(this.state.grid))
+    newGrid[index[0]][index[1]] = newVal
+    this.setState({
+      grid: newGrid
+    })
+
   }
 
   render(){
@@ -84,18 +96,25 @@ class Board extends Component {
                 let groupY= Math.floor(indY/3)
                 let groupX = Math.floor(indX/3)
                 let divStyle={backgroundColor:this.state.color[`${groupY}${groupX}`]}
+                let prefilled= null
+                 if (square==0){prefilled= true}
                 return <Square
                   style={divStyle}
                   key={`${indX} ${indY}`}
-                  prefilled
+                  index={`${indX} ${indY}`}
+                  square= {square}
+
+                  prefilled= {prefilled}
                   selectHandler= {this.selectHandler}
                   > {square} </Square>})}
             </div>)
           })}
 
-          <NumberButtonContainer numberHandler={this.numberHandler}/>
+          <NumberButtonContainer numberHandler={this.numberHandler} />
       </div>
     )
   }
 }
+//after all squares are not 0, it should trigger the fetch request, or they should press a button that says done (this button
+//triggers the fetch request, then the fetch request triggers the rendering of the difficulty buttons .)
 export default Board
