@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Difficulty = ({difficultySelector,level}) => {
+const Difficulty = (props) => {
 return (
-  <button onClick={difficultySelector} level={level}>{level}</button>
+  <button onClick={(event,level)=>props.difficultySelector(event,props.level)} level={props.level}>{props.level}</button>
 )
 }
 

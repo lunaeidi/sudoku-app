@@ -10,13 +10,16 @@ class DifficultyContainer extends Component {
 difficultySelector= (event,level) => {
   console.log(level) //level is undefined
   this.setState({selected:level})
-  //can always do if statement.
 console.log('https://sugoku.herokuapp.com/board?difficulty=' + level)
   fetch('https://sugoku.herokuapp.com/board?difficulty=' + level). //need redux store forsending this to board?
     then(res => res.json()).
     then(json => console.log(json))
+    // let store = createStore(changeState);
+    // store.dispatch({ grid:json });
+//   dispatch({ grid: json }); but would need to move the grid from the board.js into redux too
+};
 
-}
+
   render(){
     return (
       <div className="difficulty">
