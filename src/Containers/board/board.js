@@ -84,6 +84,22 @@ class Board extends Component {
     })
 
   }
+  doneHandler= (event) => {
+      let newGrid = JSON.parse(JSON.stringify(this.state.grid))
+      alert(newGrid)
+      console.log(newGrid)
+
+    fetch('https://sugoku.herokuapp.com/solve', {
+  method: 'POST',
+  body: JSON.stringify(newGrid), // or just newGrid without JSON.stringify! // data can be `string` or {object}!
+  headers:{
+    'Content-Type': 'application/json'
+  }
+}).then(res => res.json())
+  .then(response => console.log(response)); //returns the solution! then need to compare it to the board...
+  if (newGrid == response){alert("Congratulations!")} //response is not defined 
+  else {alert("wrong")}
+  }
 
   render(){
     return (
@@ -107,9 +123,10 @@ class Board extends Component {
                   prefilled= {prefilled}
                   selectHandler= {this.selectHandler}
                   > {square} </Square>})}
+
             </div>)
           })}
-
+  <button onClick={this.doneHandler}>Done</button>
           <NumberButtonContainer numberHandler={this.numberHandler} />
       </div>
     )
@@ -117,5 +134,5 @@ class Board extends Component {
 }
 // it should trigger the fetch request, or they should press a button that says done (this button
 //triggers the fetch request, then the fetch request triggers the rendering of the difficulty buttons .)
-//see conditional fetch request example from props and state lab , for fetch request based on difficulty selected 
+//see conditional fetch request example from props and state lab , for fetch request based on difficulty selected
 export default Board
