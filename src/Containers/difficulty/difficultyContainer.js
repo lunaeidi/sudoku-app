@@ -19,11 +19,12 @@ class DifficultyContainer extends Component {
         this.setState({selected:level})
         console.log('https://sugoku.herokuapp.com/board?difficulty=' + level)
         fetch('https://sugoku.herokuapp.com/board?difficulty=' + level)//need redux store forsending this to board?
-               .then(res => res.json())
-               .then(json => {
-                   this.props.initBoard(json)
-                   this.setState({redirected: true})
-               })
+            .then(res => res.json())
+            .then(json => {
+                this.props.startTimer(new Date())
+                this.props.initBoard(json.board)
+                this.setState({redirected: true})
+            })
         // let store = createStore(changeState);
         // store.dispatch({ grid:json });
         //   dispatch({ grid: json }); but would need to move the grid from the board.js into redux too
@@ -32,13 +33,13 @@ class DifficultyContainer extends Component {
 
     render(){
         return (
-            <div className="difficulty">
+                <div className="difficulty">
                 {this.state.levels.map(level =>
 
-                    <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>
+                                       <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>
 
-                )}
-                {this.state.redirected ? <Redirect to='/'/> : null}
+                                      )}
+            {this.state.redirected ? <Redirect to='/'/> : null}
             </div>
         )
     }
@@ -49,7 +50,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        initBoard: (grid) => dispatch(actions.initGrid(grid))
+        initBoard: (grid) => dispatch(actions.initGrid(grid)),
+        startTimer: (time) => dispatch(actions.startTimer(time))
     }
 }
 

@@ -1,12 +1,12 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import Square from'../../Components/square/square'
 import NumberButtonContainer from '../../Containers/numberButtonContainer'
+import * as actions from '../../actions/actions.js'
 class Board extends Component {
     state = {
-        grid: this.props.grid,
         selected: null,
-
         color:{
             '00': '#90CAF9',
             '01': '#1DE9B6',
@@ -17,11 +17,16 @@ class Board extends Component {
             '20': '#80CBC4',
             '21': '#F48FB1',
             '22': '#81D4FA'
-        }
+        },
+        message:null
+    }
+
+    componentWillUnmount() {
+        this.props.stopTimer(new Date())
     }
 
     // componentDidMount() {  //needed so the page doesnt reload
-    //   let newGrid = JSON.parse(JSON.stringify(this.state.grid)) //modifying an object within the state
+    //   let newGrid = JSON.parse(JSON.stringify(this.props.grid)) //modifying an object within the state
     //   newGrid[0][1]=4
     //   newGrid[0][5]=6
     //   newGrid[1][0]=6
@@ -60,12 +65,12 @@ class Board extends Component {
     //   })
     // }
     selectHandler = (event,index) => {
-        this.setState({selected: index })
+        this.setState({selected: index, message: null })
         console.log(index)
     }
     numberHandler= (event) => {
         /*  let numberSelected= event.target.innerHTML
-           let newGrid2= JSON.parse(JSON.stringify(this.state.grid))
+           let newGrid2= JSON.parse(JSON.stringify(this.props.grid))
            let index= this.state.selected.split('')
            console.log(index)
            let y= index[0]
@@ -75,16 +80,23 @@ class Board extends Component {
            this.setState({grid:newGrid2}) */
 
         const newVal = event.target.innerHTML
-        let index = this.state.selected.split(' ')
-        let newGrid = JSON.parse(JSON.stringify(this.state.grid))
-        newGrid[index[0]][index[1]] = newVal
-        this.setState({
-            grid: newGrid
-        })
+        if (this.state.selected !== null){
+            this.props.changeGrid(newVal, this.state.selected)
+        } else {
+            this.setState({
+                message:'No number selected!'
+            })
+        }
+   //     let index = this.state.selected.split(' ')
+   //     let newGrid = JSON.parse(JSON.stringify(this.props.grid))
+   //     newGrid[index[0]][index[1]] = newVal
+   //     this.setState({
+   //         grid: newGrid
+   //     })
 
     }
     doneHandler= (event) => {
-        let newGrid = JSON.parse(JSON.stringify(this.state.grid))
+        let newGrid = JSON.parse(JSON.stringify(this.props.grid))
         alert(newGrid)
         console.log(newGrid)
         let response
@@ -96,14 +108,15 @@ class Board extends Component {
             }
         }).then(res => res.json())
                           .then(res => response = res); //returns the solution! then need to compare it to the board...
-        if (newGrid == response){"Congratulations!"} //response is not defined
+        if (newGrid === response){"Congratulations!"} //response is not defined
         else {"wrong"}
     }
 
     render(){
         return (
+            this.props.grid === undefined ? <Redirect to="/login" /> :
             <div className= "block">
-                {this.state.grid
+                {this.props.grid
                      .map((row,indY)=>{ //indY is the index, the first row (array) has index 0....
                          return (
                              <div key={indY} className="row">
@@ -112,7 +125,7 @@ class Board extends Component {
                                       let groupX = Math.floor(indX/3)
                                       let divStyle={backgroundColor:this.state.color[`${groupY}${groupX}`]}
                                       let prefilled= null
-                                      if (square==0){prefilled= true}
+                                      if (square===0){prefilled= true}
                                       return <Square
                                                  style={divStyle}
                                                  key={`${indX} ${indY}`}
@@ -125,7 +138,7 @@ class Board extends Component {
 
                              </div>)
                      })}
-                <span></span>
+                <span className="message">{this.state.message}</span> 
                 <button onClick={this.doneHandler}>Done</button>
                 <NumberButtonContainer numberHandler={this.numberHandler} />
             </div>
@@ -138,7 +151,14 @@ const mapStateToProps = state => {
         grid: state.grid
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        changeGrid: (newVal, index) => dispatch(actions.changeGrid(newVal, index)),
+        stopTimer: (time) => dispatch(actions.stopTimer(time))
+    }
+}
 // it should trigger the fetch request, or they should press a button that says done (this button
 //triggers the fetch request, then the fetch request triggers the rendering of the difficulty buttons .)
 //see conditional fetch request example from props and state lab , for fetch request based on difficulty selected
-export default connect(mapStateToProps)(Board)
+export default connect(mapStateToProps, mapDispatchToProps)(Board)
