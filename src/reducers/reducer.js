@@ -18,7 +18,7 @@ function createStore(reducer) {
   };
 };
 
-function changeState(state= {grid:null}, action){ //should only changeState be here and the rest go in createStore.js ? 
+function changeState(state= {grid:[]}, action){ //should only changeState be here and the rest go in createStore.js ? 
   switch (action.type) {
     case 'NEW_BOARD':
       return {grid: res.board};

@@ -88,7 +88,7 @@ class Board extends Component {
       let newGrid = JSON.parse(JSON.stringify(this.state.grid))
       alert(newGrid)
       console.log(newGrid)
-
+      let response
     fetch('https://sugoku.herokuapp.com/solve', {
   method: 'POST',
   body: JSON.stringify(newGrid), // or just newGrid without JSON.stringify! // data can be `string` or {object}!
@@ -96,9 +96,9 @@ class Board extends Component {
     'Content-Type': 'application/json'
   }
 }).then(res => res.json())
-  .then(response => console.log(response)); //returns the solution! then need to compare it to the board...
-  if (newGrid == response){alert("Congratulations!")} //response is not defined 
-  else {alert("wrong")}
+  .then(res => response = res); //returns the solution! then need to compare it to the board...
+  if (newGrid == response){"Congratulations!"} //response is not defined
+  else {"wrong"}
   }
 
   render(){
@@ -126,6 +126,7 @@ class Board extends Component {
 
             </div>)
           })}
+          <span></span>
   <button onClick={this.doneHandler}>Done</button>
           <NumberButtonContainer numberHandler={this.numberHandler} />
       </div>

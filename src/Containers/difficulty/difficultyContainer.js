@@ -1,6 +1,7 @@
 //when click button, load it in the URL of the fetch request , with query
 
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import Difficulty from '../../Components/difficulty'
 class DifficultyContainer extends Component {
   state= {levels: ["easy","medium","hard"]  }
@@ -17,6 +18,7 @@ console.log('https://sugoku.herokuapp.com/board?difficulty=' + level)
     // let store = createStore(changeState);
     // store.dispatch({ grid:json });
 //   dispatch({ grid: json }); but would need to move the grid from the board.js into redux too
+
 };
 
 
@@ -30,9 +32,16 @@ console.log('https://sugoku.herokuapp.com/board?difficulty=' + level)
   )}
   </div>
     )
-
-
 }
 }
+const mapStateToProps = (state) => {
+  return { grid: state.grid };
+};
 
-export default DifficultyContainer
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initStore : () => dispatch()    
+  }
+}
+
+export default connect(mapStateToProps)(DifficultyContainer)

@@ -5,6 +5,7 @@ class ScoresController < ApplicationController
     Score.create( )
   end
   def index
+    @scores= Score.all
     render json: @score, status: 200
 #     respond_to do |format|
 #   format.html { render :show }
