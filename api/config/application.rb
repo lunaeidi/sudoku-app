@@ -23,14 +23,14 @@ module React
     config.load_defaults 5.2
 
 
-        config.middleware.insert_before 0, "Rack::Cors" do
+        config.middleware.insert_before 0, Rack::Cors do
           allow do
             origins '*'
             resource '*', :headers => :any, :methods => [:get, :post, :patch, :options]
           end
         end
 
-    
+
   #   config.action_dispatch.default_headers = {
   #   'Access-Control-Allow-Origin' => 'http://localhost:3000',
   #   'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")
