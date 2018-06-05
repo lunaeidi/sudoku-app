@@ -13,7 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route exact path="/login" component={DifficultyContainer}/>
+          <Route exact path="/difficulty" component={DifficultyContainer}/>
           <Route exact path="/" component={Board}/>
           <Route exact path="/scores" component={Scores}/>
         </Switch>

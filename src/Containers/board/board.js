@@ -23,6 +23,17 @@ class Board extends Component {
 
     componentWillUnmount() {
         this.props.stopTimer(new Date())
+        fetch('localhost:2000/scores', { //is this right?
+            method: 'POST',
+            body: {
+              value: JSON.stringify("time"), //put saved time from redux here
+              name: "name"//where will it prompt them to say name?
+          },
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+                          .then(res => console.log(res) )
     }
 
     // componentDidMount() {  //needed so the page doesnt reload
@@ -95,9 +106,10 @@ class Board extends Component {
    //     })
 
     }
+    //let feedback
     doneHandler= (event) => {
         let newGrid = JSON.parse(JSON.stringify(this.props.grid))
-        alert(newGrid)
+
         console.log(newGrid)
         let response
         fetch('https://sugoku.herokuapp.com/solve', {
@@ -108,13 +120,13 @@ class Board extends Component {
             }
         }).then(res => res.json())
                           .then(res => response = res); //returns the solution! then need to compare it to the board...
-        if (newGrid === response){"Congratulations!"} //response is not defined
-        else {"wrong"}
+        if (newGrid === response){this.setState({message:"Congratulations!"})} //NEED REDIRECT HERE !
+        else {this.setState({message:"wrong. keep trying."})}
     }
 
     render(){
         return (
-            this.props.grid === undefined ? <Redirect to="/login" /> :
+            this.props.grid === undefined ? <Redirect to="/difficulty" /> :
             <div className= "block">
                 {this.props.grid
                      .map((row,indY)=>{ //indY is the index, the first row (array) has index 0....
@@ -138,7 +150,7 @@ class Board extends Component {
 
                              </div>)
                      })}
-                <span className="message">{this.state.message}</span> 
+                <span className="message">{this.state.message}</span>
                 <button onClick={this.doneHandler}>Done</button>
                 <NumberButtonContainer numberHandler={this.numberHandler} />
             </div>
