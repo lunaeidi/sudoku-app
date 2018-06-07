@@ -7,6 +7,7 @@ import * as actions from '../../actions/actions.js'
 class Board extends Component {
     state = {
         selected: null,
+        name:null,
         color:{
             '00': '#90CAF9',
             '01': '#1DE9B6',
@@ -18,63 +19,37 @@ class Board extends Component {
             '21': '#F48FB1',
             '22': '#81D4FA'
         },
-        message:null
-    }
+        message:null,
+        completed:true,
+        submittedScore:false
 
-    componentWillUnmount() {
-        this.props.stopTimer(new Date())
-        fetch('localhost:2000/scores', { //is this right?
+    }
+/* completed:set to true for testing purposes, usually would be false */
+    nameHandler = () => {
+
+const postBody= {
+
+    value: this.props.stopTime - this.props.startTime,
+    name: this.state.name
+
+}
+
+        fetch('http://localhost:2000/scores', {
+
             method: 'POST',
-            body: {
-              value: JSON.stringify("time"), //put saved time from redux here
-              name: "name"//where will it prompt them to say name?
-          },
+            body: JSON.stringify(postBody),
+
             headers:{
                 'Content-Type': 'application/json'
             }
         }).then(res => res.json())
-                          .then(res => console.log(res) )
+                          .then(res => console.log(res),this.setState({submittedScore:true}) )
+    }
+    nameValueHandler = (event) => {
+      this.setState({name:event.target.value})
     }
 
-    // componentDidMount() {  //needed so the page doesnt reload
-    //   let newGrid = JSON.parse(JSON.stringify(this.props.grid)) //modifying an object within the state
-    //   newGrid[0][1]=4
-    //   newGrid[0][5]=6
-    //   newGrid[1][0]=6
-    //   newGrid[2][0]=7
-    //   newGrid[3][1]=6
-    //   newGrid[6][1]=9
-    //   newGrid[7][1]=1
-    //   newGrid[2][2]=2
-    //   newGrid[3][2]=9
-    //   newGrid[7][2]=3
-    //   newGrid[1][3]=3
-    //   newGrid[6][3]=8
-    //   newGrid[8][3]=4
-    //   newGrid[1][4]=2
-    //   newGrid[3][4]=1
-    //   newGrid[5][4]=7
-    //   newGrid[7][4]=5
-    //   newGrid[0][5]=6
-    //   newGrid[4][5]=9
-    //   newGrid[6][5]=2
 
-    //   newGrid[1][6]=5
-    //   newGrid[1][7]=9
-    //   newGrid[2][7]=8
-    //   newGrid[5][7]=6
-    //   newGrid[5][6]=9
-    //   newGrid[6][6]=1
-    //   newGrid[6][8]=5
-    //   newGrid[7][8]=9
-    //   newGrid[8][7]=2
-
-
-
-    //   this.setState({
-    //     grid: newGrid
-    //   })
-    // }
     selectHandler = (event,index) => {
         this.setState({selected: index, message: null })
         console.log(index)
@@ -120,14 +95,18 @@ class Board extends Component {
             }
         }).then(res => res.json())
                           .then(res => response = res); //returns the solution! then need to compare it to the board...
-        if (newGrid === response){this.setState({message:"Congratulations!"})} //NEED REDIRECT HERE !
+        if (newGrid === response){this.setState({message:"Congratulations!", completed:true})} //NEED REDIRECT HERE !
         else {this.setState({message:"wrong. keep trying."})}
+
+        this.props.stopTimer(new Date())
     }
 
     render(){
         return (
-            this.props.grid === undefined ? <Redirect to="/difficulty" /> :
+          this.props.grid === undefined ? <Redirect to="/difficulty" /> :
             <div className= "block">
+            {this.state.submittedScore === true ? <Redirect to= "/scores"/> : null}
+
                 {this.props.grid
                      .map((row,indY)=>{ //indY is the index, the first row (array) has index 0....
                          return (
@@ -150,7 +129,14 @@ class Board extends Component {
 
                              </div>)
                      })}
-                <span className="message">{this.state.message}</span>
+                <div className="message">{this.state.message}</div>
+                {this.state.completed===true?
+                  <p>Your score: {this.props.stopTime - this.props.startTime} miliseconds.<br/>
+                  If you would like to save your score, enter your name and press submit.<br/>
+                  <input type="text" onChange={this.nameValueHandler}/>
+                  <button onClick={this.nameHandler}>Submit</button></p> : null}
+
+
                 <button onClick={this.doneHandler}>Done</button>
                 <NumberButtonContainer numberHandler={this.numberHandler} />
             </div>
@@ -160,7 +146,10 @@ class Board extends Component {
 
 const mapStateToProps = state => {
     return {
-        grid: state.grid
+        grid: state.grid,
+        startTime: state.startTime,
+        stopTime: state.stopTime
+
     }
 }
 

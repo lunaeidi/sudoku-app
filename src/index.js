@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { Provider } from 'react-redux'; /* code change */
+import { Provider } from 'react-redux'; 
 //import shoppingListItemReducer from './reducers/shoppingListItemReducer';
 import store from './store'
 

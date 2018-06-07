@@ -1,8 +1,10 @@
+require 'pry'
 class ScoresController < ApplicationController
   #the logic for signing in goes here.
   def create
 #app needs to make a post request to /scores
-    Score.create(value: params[:username], name:params[:name] )
+    Score.create(value: params[:value], name:params[:name] )
+    binding.pry
   end
   def index
     @scores= Score.all

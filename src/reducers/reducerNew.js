@@ -17,17 +17,17 @@ const reducer = (state= {initialState}, action) => { //should only changeState b
         newGrid[index[1]][index[0]] = action.newVal
         return {
             ...state,
-            grid: newGrid 
+            grid: newGrid
         }
     case 'START_TIMER' :
         return {
             ...state,
-            time: action.time
+            startTime: action.time
         }
     case 'STOP_TIMER' :
         return {
             ...state,
-            time: action.time
+            stopTime: action.time
         }
     default:
         return state;
