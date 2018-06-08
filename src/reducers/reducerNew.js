@@ -4,7 +4,7 @@ const initialState = {
     stopTime: null
 }
 
-const reducer = (state= {initialState}, action) => { //should only changeState be here and the rest go in createStore.js ?
+const reducer = (state= {initialState}, action) => { 
     switch (action.type) {
     case 'NEW_BOARD':
         return {

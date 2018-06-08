@@ -115,15 +115,14 @@ const postBody= {
                                       let groupY= Math.floor(indY/3)
                                       let groupX = Math.floor(indX/3)
                                       let divStyle={backgroundColor:this.state.color[`${groupY}${groupX}`]}
-                                      let prefilled= null
-                                      if (square===0){prefilled= true}
+
+
                                       return <Square
                                                  style={divStyle}
                                                  key={`${indX} ${indY}`}
                                                  index={`${indX} ${indY}`}
                                                  square= {square}
 
-                                                 prefilled= {prefilled}
                                                  selectHandler= {this.selectHandler}
                                              > {square} </Square>})}
 
@@ -159,7 +158,5 @@ const mapDispatchToProps = (dispatch) => {
         stopTimer: (time) => dispatch(actions.stopTimer(time))
     }
 }
-// it should trigger the fetch request, or they should press a button that says done (this button
-//triggers the fetch request, then the fetch request triggers the rendering of the difficulty buttons .)
-//see conditional fetch request example from props and state lab , for fetch request based on difficulty selected
+
 export default connect(mapStateToProps, mapDispatchToProps)(Board)
