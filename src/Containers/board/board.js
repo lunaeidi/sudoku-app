@@ -20,7 +20,7 @@ class Board extends Component {
             '22': '#81D4FA'
         },
         message:null,
-        completed:true,
+        completed:false,
         submittedScore:false
 
     }
@@ -81,7 +81,6 @@ const postBody= {
    //     })
 
     }
-    //let feedback
     doneHandler= (event) => {
         let newGrid = JSON.parse(JSON.stringify(this.props.grid))
 

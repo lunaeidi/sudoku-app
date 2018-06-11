@@ -4,7 +4,7 @@ const initialState = {
     stopTime: null
 }
 
-const reducer = (state= {initialState}, action) => { 
+const reducer = (state= {initialState}, action) => {
     switch (action.type) {
     case 'NEW_BOARD':
         return {
@@ -12,7 +12,7 @@ const reducer = (state= {initialState}, action) => {
             grid: action.grid
         }
     case 'CHANGE_GRID':
-        const newGrid = JSON.parse(JSON.stringify(state.grid))
+        const newGrid = JSON.parse(JSON.stringify(state.grid)) //need newGrid because 
         const index = action.index.split(' ')
         newGrid[index[1]][index[0]] = action.newVal
         return {

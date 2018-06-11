@@ -4,8 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { Provider } from 'react-redux'; 
-//import shoppingListItemReducer from './reducers/shoppingListItemReducer';
+import { Provider } from 'react-redux';
+
 import store from './store'
 
 const app = <Provider store = {store}>

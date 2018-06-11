@@ -30,9 +30,9 @@ class DifficultyContainer extends Component {
                 <div className="difficulty">
                 {this.state.levels.map(level =>
 
-                                       <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>
+                     <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>
 
-                                      )}
+                )}
             {this.state.redirected ? <Redirect to='/'/> : null}
             </div>
         )

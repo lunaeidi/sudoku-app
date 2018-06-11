@@ -16,16 +16,7 @@ class NumberButtonContainer extends Component {
       )}
 
 
-      {/*<NumberButton>1</NumberButton>
-        <NumberButton>2</NumberButton>
-        <NumberButton>3</NumberButton>
-        <NumberButton></NumberButton>
-        <NumberButton></NumberButton>
-        <NumberButton></NumberButton>
-        <NumberButton></NumberButton>
-        <NumberButton></NumberButton>
-        <NumberButton></NumberButton>*/}
-      </div>
+          </div>
     )
   }
 }
