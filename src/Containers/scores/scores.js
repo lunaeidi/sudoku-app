@@ -51,7 +51,8 @@ event.target.innerHTML
         </div>}
       )
       }
-      {this.state.likes.map((like, index)=> <Likes likeHandler={this.addLike} index={index} like={like}>{like}</Likes>)}
+
+      {this.state.scores_and_likes.map((s_and_l, index)=><Likes likeHandler={this.addLike} index={index} like={s_and_l.likes}>{s_and_l.likes}</Likes>)}
 
 
       </div>
