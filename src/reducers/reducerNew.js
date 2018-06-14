@@ -1,7 +1,8 @@
 const initialState = {
     grid: [],
     startTime: null,
-    stopTime: null
+    stopTime: null,
+    s_and_l: []
 }
 
 const reducer = (state= {initialState}, action) => {
@@ -19,11 +20,16 @@ const reducer = (state= {initialState}, action) => {
             ...state,
             grid: newGrid
         }
-
+    case 'INIT_LIKE' :
+        let init_new_s_and_l=JSON.parse(JSON.stringify(action.s_and_l))
+        return {
+          ...state,
+          s_and_l: init_new_s_and_l
+        }
     case 'LIKE' :
       let new_s_and_l= JSON.parse(JSON.stringify(state.s_and_l))
-      const index= action.index
-      new_s_and_l[index]["likes"]=new_s_and_l[index]["likes"] + 1
+      const like_index= action.index
+      new_s_and_l[like_index]["likes"]=new_s_and_l[like_index]["likes"] + 1
         return {
           ...state,
           s_and_l: new_s_and_l

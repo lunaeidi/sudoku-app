@@ -29,9 +29,15 @@ export const stopTimer = (time) => {
 export const addLike = (index) => {
   return {
     type: 'LIKE',
-    s_and_l: s_and_l,
-    newVal: newVal,
+
     index: index
 
   }
+}
+export const initLike = (s_and_l) => {
+  return {
+    type: 'INIT_LIKE',
+    s_and_l: s_and_l
+  }
+
 }
