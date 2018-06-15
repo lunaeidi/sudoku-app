@@ -32,7 +32,7 @@ export const addLike = (index) => {
   return (dispatch,getState) => {
     let id1= index + 1
     const postBody= {
-          likes: getState().s_and_l[index]["likes"] //+ 1
+          likes: getState().s_and_l[index]["likes"] + 1
     }
     const JSONpart = {
         method: 'PATCH',
