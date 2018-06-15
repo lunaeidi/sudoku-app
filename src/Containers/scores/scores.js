@@ -30,7 +30,7 @@ class Scores extends Component {
 
   addLike= (event,index) => {
     let id= index + 1
-    this.props.addLike(index) //need to change the fetch to say index + 1 ...
+    this.props.addLike(index) 
 
     //this.props.addLike(index) or it should be here !
 // console.log("hi"+this.props.s_and_l[index]["likes"]) //always one behind !
