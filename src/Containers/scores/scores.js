@@ -30,27 +30,28 @@ class Scores extends Component {
 
   addLike= (event,index) => {
     let id= index + 1
-    this.props.addLike(index) //need to change the fetch to say index + 1 ... 
+    this.props.addLike(index) //need to change the fetch to say index + 1 ...
+
     //this.props.addLike(index) or it should be here !
-console.log("hi"+this.props.s_and_l[index]["likes"]) //always one behind !
-const postBody= {
-      likes: this.props.s_and_l[index]["likes"] //+ 1
-}
-const JSONpart = {
-
-    method: 'PATCH',
-    body: JSON.stringify(postBody),
-
-    headers:{
-        'Content-Type': 'application/json'
-    }
-}
-
-
-let id= index + 1
-console.log('http://localhost:2000/scores/'+id)
-        fetch('http://localhost:2000/scores/'+id, JSONpart).then(res => res.json())
-                          .then(res => this.props.addLike(index))
+// console.log("hi"+this.props.s_and_l[index]["likes"]) //always one behind !
+// const postBody= {
+//       likes: getState.s_and_l[index]["likes"] //+ 1
+// }
+// const JSONpart = {
+//
+//     method: 'PATCH',
+//     body: JSON.stringify(postBody),
+//
+//     headers:{
+//         'Content-Type': 'application/json'
+//     }
+// }
+//
+//
+//
+// console.log('http://localhost:2000/scores/'+id)
+//         fetch('http://localhost:2000/scores/'+id, JSONpart).then(res => res.json())
+//                           .then(res => this.props.addLike(index))
 
   }
   render (){

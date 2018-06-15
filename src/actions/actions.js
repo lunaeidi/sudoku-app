@@ -28,11 +28,11 @@ export const stopTimer = (time) => {
 }
 
 
-export function addLike= (index) => {
-  return (dispatch) => {
-    let id= index + 1
+export const addLike = (index) => {
+  return (dispatch,getState) => {
+    let id1= index + 1
     const postBody= {
-          likes: this.props.s_and_l[index]["likes"] //+ 1
+          likes: getState().s_and_l[index]["likes"] //+ 1
     }
     const JSONpart = {
         method: 'PATCH',
@@ -41,18 +41,18 @@ export function addLike= (index) => {
             'Content-Type': 'application/json'
         }
     }
-    return fetch('http://localhost:2000/scores/'+id, JSONpart).then(res => res.json())
-                      .then(res => {dispatch({ type: 'LIKE', index})}) 
+    return fetch('http://localhost:2000/scores/'+id1, JSONpart).then(res => res.json())
+                      .then(res => {dispatch({ type: 'LIKE', index})})
   }
 }
-export const addLike = (index) => {
-  return {
-    type: 'LIKE',
-
-    index: index
-
-  }
-}
+// export const addLike = (index) => {
+//   return {
+//     type: 'LIKE',
+//
+//     index: index
+//
+//   }
+// }
 export const initLike = (s_and_l) => {
   return {
     type: 'INIT_LIKE',
