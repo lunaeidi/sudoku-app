@@ -10,7 +10,6 @@ class Scores extends Component {
     // }
 
   componentDidMount() {
-    let props_bind= this.props// where can i access the value of 'this.props' to pass into bind ? here
     fetch('http://localhost:2000/scores')
     .then(res => res.json())
     .then(json => {console.log(json)
@@ -21,8 +20,7 @@ class Scores extends Component {
 
       let newscoresandlikes= []
           json.forEach((score)=>{
-            console.log(props_bind) //its accessible here !
-          newscoresandlikes.push({score:`${score.value} - ${score.name}`,likes: score.likes })
+              newscoresandlikes.push({score:`${score.value} - ${score.name}`,likes: score.likes })
           } )
           this.props.initLike(newscoresandlikes)
             console.log(this.props.s_and_l)
@@ -31,16 +29,16 @@ class Scores extends Component {
   }
 
   addLike= (event,index) => {
-      // let likes= this.state.scores_and_likes[index]["likes"]
-    // this.setState({scores_and_likes:likes + 1})
-//this.props.addLike(index)
+    let id= index + 1
+    this.props.addLike(index) //need to change the fetch to say index + 1 ... 
+    //this.props.addLike(index) or it should be here !
 console.log("hi"+this.props.s_and_l[index]["likes"]) //always one behind !
 const postBody= {
-      likes: this.props.s_and_l[index]["likes"] + 1
+      likes: this.props.s_and_l[index]["likes"] //+ 1
 }
 const JSONpart = {
 
-    method: 'PATCH',                      //maybe this needs to work with json format and serializer too!!
+    method: 'PATCH',
     body: JSON.stringify(postBody),
 
     headers:{
@@ -50,10 +48,9 @@ const JSONpart = {
 
 
 let id= index + 1
-console.log("id"+ id)
 console.log('http://localhost:2000/scores/'+id)
         fetch('http://localhost:2000/scores/'+id, JSONpart).then(res => res.json())
-                          .then(res => this.props.addLike(index)) //when the scores get rerendered they need to come from backend !
+                          .then(res => this.props.addLike(index))
 
   }
   render (){
