@@ -7,9 +7,7 @@ class Scores extends Component {
   //   scores_and_likes: [],
   //   scores: [],
   //   likes: []
-  //
-  //
-  // }
+    // }
 
   componentDidMount() {
     let props_bind= this.props// where can i access the value of 'this.props' to pass into bind ? here
@@ -24,7 +22,7 @@ class Scores extends Component {
       let newscoresandlikes= []
           json.forEach((score)=>{
             console.log(props_bind) //its accessible here !
-          newscoresandlikes.push({score:`${score.value} - ${score.name}`,likes: 0 })
+          newscoresandlikes.push({score:`${score.value} - ${score.name}`,likes: score.likes })
           } )
           this.props.initLike(newscoresandlikes)
             console.log(this.props.s_and_l)
@@ -33,15 +31,31 @@ class Scores extends Component {
   }
 
   addLike= (event,index) => {
-    // console.log(index)
-    // let likes= this.state.scores_and_likes[index]["likes"]
+      // let likes= this.state.scores_and_likes[index]["likes"]
     // this.setState({scores_and_likes:likes + 1})
-    console.log(index)
+//this.props.addLike(index)
+console.log("hi"+this.props.s_and_l[index]["likes"]) //always one behind !
+const postBody= {
+      likes: this.props.s_and_l[index]["likes"] + 1
+}
+const JSONpart = {
 
-this.props.addLike(index)
+    method: 'PATCH',                      //maybe this needs to work with json format and serializer too!!
+    body: JSON.stringify(postBody),
+
+    headers:{
+        'Content-Type': 'application/json'
+    }
+}
+
+
+let id= index + 1
+console.log("id"+ id)
+console.log('http://localhost:2000/scores/'+id)
+        fetch('http://localhost:2000/scores/'+id, JSONpart).then(res => res.json())
+                          .then(res => this.props.addLike(index)) //when the scores get rerendered they need to come from backend !
 
   }
-
   render (){
     return (
       <div>

@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_205923) do
+ActiveRecord::Schema.define(version: 2018_06_14_185748) do
 
   create_table "scores", force: :cascade do |t|
     t.integer "value"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "likes"
   end
 
 end

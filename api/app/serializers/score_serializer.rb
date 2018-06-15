@@ -1,3 +1,3 @@
 class ScoreSerializer < ActiveModel::Serializer
-  attributes :id, :value, :name
+  attributes :id, :value, :name, :likes
 end
