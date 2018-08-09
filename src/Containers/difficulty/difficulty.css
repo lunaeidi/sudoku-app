@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=MedievalSharp');
+
+* {
+  box-sizing: border-box
+}
+
+.difficulty-container {
+  width:100vw;
+  height:100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.difficulty-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left:0;
+  z-index: -1000;
+}
+
+.difficulty-title{
+  font-size:10em;
+}
+.difficulty-text {
+  font-family: 'MedievalSharp', cursive;
+  position: relative;
+  display: inline-block;
+  margin: .25em;
+  padding: .5em .75em;
+  color: #ffffff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: url('../../assets/text-background.jpg');
+}
+
+.difficulty-select-text {
+  font-size: 2em;
+  background-image: url('../../assets/text-background-2.jpg');
+}
+
+.difficulty-button {
+  background: #FF9933;
+  color: #fff;
+  border:none;
+  position:relative;
+  height: 60px;
+  font-size: 1.6em;
+  padding: 0 2em;
+  margin: 1em;
+  cursor: pointer;
+  transition: 800ms ease all;
+  outline: none;
+  width: 200px;
+}
+
+.difficulty-button:hover {
+  background: transparent;
+  color: #FF9933;
+}
+
+.difficulty-button:before,
+.difficulty-button:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width:0;
+  background: #FF9933;
+  transition: 400ms ease all;
+}
+
+.difficulty-button:after{
+  right: inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+
+.difficulty-button:hover:before,
+.difficulty-button:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
