@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Rammetto+One');
+button{
+    border-radius: 8px;
+    padding:5px;
+    margin:2px;
+
+}
+button:hover{
+  background: #DEE;
+  box-shadow: 1px 1px 5px grey;
+  border-radius: 8px;
+}
+.sudoku{
+  font-family: 'Rammetto One', cursive;
+  font-size: 20;
+}
