@@ -26,3 +26,9 @@ export const stopTimer = (time) => {
         time: time
     }
 }
+export const storeSolution= (solution) => {
+  return {
+    type: 'STORE_SOLUTION',
+    solution: solution
+  }
+}

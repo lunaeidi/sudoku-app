@@ -3,7 +3,14 @@
   padding:0px 0px;
 }
 .block {
+margin: 5%;
 }
 .message {
     display:block;
+
+}
+.done{
+
+margin-top: 40px;
+
 }

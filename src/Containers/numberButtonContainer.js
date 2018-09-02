@@ -6,7 +6,7 @@ class NumberButtonContainer extends Component {
   }
   render (){
     return (
-      <div>
+      <div className= "numberCon">
       {this.state.numbers.map(number =>
         <NumberButton
         numberHandler= {this.props.numberHandler}

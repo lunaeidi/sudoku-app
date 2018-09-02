@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import Square from'../../Components/square/square'
 import NumberButtonContainer from '../../Containers/numberButtonContainer'
 import * as actions from '../../actions/actions.js'
+import './board.css'
 class Board extends Component {
     state = {
         selected: null,
@@ -57,7 +58,8 @@ const postBody= {
     numberHandler= (event) => {
         /*  let numberSelected= event.target.innerHTML
            let newGrid2= JSON.parse(JSON.stringify(this.props.grid))
-           let index= this.state.selected.split('')
+           let index= this.state.selecte
+           d.split('')
            console.log(index)
            let y= index[0]
            let x=index[1]
@@ -84,16 +86,17 @@ const postBody= {
     doneHandler= (event) => {
         let newGrid = JSON.parse(JSON.stringify(this.props.grid))
 
-        console.log(newGrid)
-        let response
-        fetch('https://sugoku.herokuapp.com/solve', {
-            method: 'POST',
-            body: JSON.stringify(newGrid), // or just newGrid without JSON.stringify! // data can be `string` or {object}!
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        }).then(res => res.json())
-                          .then(res => response = res); //returns the solution! then need to compare it to the board...
+
+        let response= this.props.solution[0].board
+        console.log(response)
+        // fetch('https://sugoku.herokuapp.com/solve', {
+        //     method: 'POST',
+        //     body: JSON.stringify(newGrid), // or just newGrid without JSON.stringify! // data can be `string` or {object}!
+        //     headers:{
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(res => res.json())
+        //                   .then(res => response = res); //returns the solution! then need to compare it to the board...
         if (newGrid === response){this.setState({message:"Congratulations!", completed:true})} //NEED REDIRECT HERE !
         else {this.setState({message:"wrong. keep trying."})}
 
@@ -121,8 +124,9 @@ const postBody= {
                                                  key={`${indX} ${indY}`}
                                                  index={`${indX} ${indY}`}
                                                  square= {square}
-
+                                                 selected = {this.state.selected}
                                                  selectHandler= {this.selectHandler}
+
                                              > {square} </Square>})}
 
                              </div>)
@@ -135,8 +139,10 @@ const postBody= {
                   <button onClick={this.nameHandler}>Submit</button></p> : null}
 
 
-                <button onClick={this.doneHandler}>Done</button>
+
                 <NumberButtonContainer numberHandler={this.numberHandler} />
+
+                <button className="done"onClick={this.doneHandler}>Done</button>
             </div>
         )
     }
@@ -146,7 +152,8 @@ const mapStateToProps = state => {
     return {
         grid: state.grid,
         startTime: state.startTime,
-        stopTime: state.stopTime
+        stopTime: state.stopTime,
+        solution: state.solution
 
     }
 }

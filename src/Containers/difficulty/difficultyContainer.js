@@ -15,8 +15,10 @@ class DifficultyContainer extends Component {
     difficultySelector= async (event,level) => {
         console.log(level)
         this.setState({selected:level})
-        console.log(SudokuGenerator.generate(1))
+        console.log("solution", SudokuGenerator.generate(1))
+
         let generate= await SudokuGenerator.generate(1)
+        this.props.solution(generate)
         let getSheets = await SudokuGenerator.generatedBoards[0];
         console.log(generate)
       //  console.log(SudokuGenerator.loadBoard(generate.signature))
@@ -55,7 +57,7 @@ class DifficultyContainer extends Component {
 
                 <div className="difficulty">
                 <div className="sudoku"><h1>SUDOKU</h1></div>
-                <div className="buttons">
+                <div classNa="buttons">
                 {this.state.levels.map(level =>
 
                      <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>
@@ -74,8 +76,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         initBoard: (grid) => dispatch(actions.initGrid(grid)),
-        startTimer: (time) => dispatch(actions.startTimer(time))
-    }
+        startTimer: (time) => dispatch(actions.startTimer(time)),
+        solution: (solution) => dispatch(actions.storeSolution(solution))
+      }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DifficultyContainer)

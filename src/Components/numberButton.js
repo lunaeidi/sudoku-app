@@ -1,4 +1,5 @@
 import React from 'react'
+import './numberButton.css'
 
 const NumberButton = ({value, numberHandler}) => {
 return (
