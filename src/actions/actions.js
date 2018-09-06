@@ -8,7 +8,7 @@ export const initGrid = (grid) => {
 export const changeGrid = (newVal, index) => {
     return {
         type: 'CHANGE_GRID' ,
-        newVal : newVal,
+        newVal : parseInt(newVal, 10),
         index: index
     }
 }

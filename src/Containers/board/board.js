@@ -84,11 +84,14 @@ const postBody= {
 
     }
     doneHandler= (event) => {
+      console.log(this.props.grid)
         let newGrid = JSON.parse(JSON.stringify(this.props.grid))
-
-
+        console.log(newGrid)
+console.log(JSON.stringify(this.props.grid))
+console.log(JSON.stringify(newGrid))
         let response= this.props.solution[0].board
         console.log(response)
+        console.log(JSON.parse(JSON.stringify(response))) //this doesnt change it.
         // fetch('https://sugoku.herokuapp.com/solve', {
         //     method: 'POST',
         //     body: JSON.stringify(newGrid), // or just newGrid without JSON.stringify! // data can be `string` or {object}!
