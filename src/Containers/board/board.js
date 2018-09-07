@@ -25,6 +25,10 @@ class Board extends Component {
         submittedScore:false
 
     }
+    // componentDidMount(){
+    //   let response= this.props.solution[0].board
+    //   console.log(response)
+    // }
 /* completed:set to true for testing purposes, usually would be false */
     nameHandler = () => {
 
@@ -100,8 +104,9 @@ console.log(JSON.stringify(newGrid))
         //     }
         // }).then(res => res.json())
         //                   .then(res => response = res); //returns the solution! then need to compare it to the board...
-        if (newGrid === response){this.setState({message:"Congratulations!", completed:true})} //NEED REDIRECT HERE !
-        else {this.setState({message:"wrong. keep trying."})}
+         if (newGrid === response)
+        {this.setState({message:"Congratulations!", completed:true})} //NEED REDIRECT HERE !
+         else {this.setState({message:"wrong. keep trying."})}
 
         this.props.stopTimer(new Date())
     }

@@ -4,7 +4,7 @@ class ScoresController < ApplicationController
   def create
 #app needs to make a post request to /scores
     Score.create(value: params[:value], name:params[:name] )
-    binding.pry
+
   end
   def index
     @scores= Score.all

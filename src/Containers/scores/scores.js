@@ -52,9 +52,9 @@ class Scores extends Component {
     //  )
       }
 {console.log(this.state.scores_and_likes)}
-      {this.state.scores_and_likes.map((s_and_l, index)=><div><p>{s_and_l.score}</p><Likes likeHandler={this.addLike} index={index} like={s_and_l.likes}>{s_and_l.likes}</Likes></div>)}
+      {this.state.scores_and_likes.map((s_and_l, index)=><div><p>{s_and_l.score}</p></div>)}
 
-
+ {/*<Likes likeHandler={this.addLike} index={index} like={s_and_l.likes}>{s_and_l.likes}</Likes>*/}
       </div>
     )
   }
