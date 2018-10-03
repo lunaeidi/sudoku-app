@@ -57,7 +57,7 @@ class DifficultyContainer extends Component {
 
                 <div className="difficulty">
                 <div className="sudoku"><h1>SUDOKU</h1></div>
-                <div classNa="buttons">
+                <div className="buttons">
                 {this.state.levels.map(level =>
 
                      <Difficulty difficultySelector= {this.difficultySelector} level={level}>{level}</Difficulty>

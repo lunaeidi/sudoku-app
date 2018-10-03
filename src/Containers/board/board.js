@@ -105,10 +105,11 @@ console.log(JSON.stringify(newGrid))
         // }).then(res => res.json())
         //                   .then(res => response = res); //returns the solution! then need to compare it to the board...
          if (newGrid === response)
-        {this.setState({message:"Congratulations!", completed:true})} //NEED REDIRECT HERE !
+        {this.setState({message:"Congratulations!", completed:true})
+        this.props.stopTimer(new Date())} //NEED REDIRECT HERE !
          else {this.setState({message:"wrong. keep trying."})}
 
-        this.props.stopTimer(new Date())
+
     }
 
     render(){
