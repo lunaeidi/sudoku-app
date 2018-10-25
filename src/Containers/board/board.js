@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import Square from'../../Components/square/square'
+import Timer from '../../Components/timer/timer'
 import NumberButtonContainer from '../../Containers/numberButtonContainer'
 import * as actions from '../../actions/actions.js'
 import './board.css'
@@ -152,6 +153,7 @@ console.log(JSON.stringify(newGrid))
                 <NumberButtonContainer numberHandler={this.numberHandler} />
 
                 <button className="done"onClick={this.doneHandler}>Done</button>
+                <Timer/>
             </div>
         )
     }
