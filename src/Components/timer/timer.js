@@ -1,18 +1,28 @@
 import React from 'react'
 class Timer extends React.Component {
   state= {
-    time: 0
+    hour: 0,
+    minute: 0,
+    second: 0
+  }
+  zeroAdder = (unit) => {
+    if (this.state[unit] < 10){
+      return "0" + this.state[unit]
+    }
+    else{
+      return this.state[unit]
+    }
   }
   add = () => {
-    let newTime= this.state.time + 1
-    this.setState({time:newTime})
+    let newTime= this.state.second + 1
+    this.setState({second:newTime})
   }
 
   render(){
 setTimeout(this.add,1000)
     return(
       <div>
-    {this.state.time}
+    {this.state.hour}:{this.zeroAdder("minute")}:{this.zeroAdder("second")}
       </div>
     )
 
